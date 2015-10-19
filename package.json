@@ -1,0 +1,22 @@
+{
+  "name": "playground-react-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "easybird.be <jonathan@easybird.be> (http://easybird.be/)",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "0.7.0",
+    "firebase": "2.3.1",
+    "react": "0.13.3",
+    "react-router": "0.13.3",
+    "reactfire": "0.4.0"
+  },
+  "devDependencies": {
+    "babel-loader": "5.3.2",
+    "webpack": "1.12.2"
+  }
+}
