@@ -1,17 +1,13 @@
-var React = require('react');
+import React from 'react';
 
-var UserProfile = React.createClass({
-    propTypes: {
-        username: React.PropTypes.string.isRequired,
-        bio: React.PropTypes.object.isRequired
-    },
-    render: function () {
-        return (
-            <div>
-                <h3> User Profile </h3>
-                <ul className="list-group">
+class UserProfile extends React.Component {
+  render() {
+    return (
+      <div>
+        <h3> User Profile </h3>
+        <ul className="list-group">
           {this.props.bio.avatar_url && <li className="list-group-item">
-              <img src={this.props.bio.avatar_url} className="img-rounded img-responsive"/>
+            <img src={this.props.bio.avatar_url} className="img-rounded img-responsive"/>
           </li>}
           {this.props.bio.name && <li className="list-group-item">Name: {this.props.bio.name}</li>}
           {this.props.bio.login && <li className="list-group-item">Username: {this.props.bio.login}</li>}
@@ -22,12 +18,18 @@ var UserProfile = React.createClass({
           {this.props.bio.following !== null && <li className="list-group-item">Following: {this.props.bio.following}</li>}
           {this.props.bio.public_repos !== null && <li className="list-group-item">Public Repos: {this.props.bio.public_repos}</li>}
           {this.props.bio.blog && <li className="list-group-item">Blog:
-              <a href={this.props.bio.blog}> {this.props.bio.blog}</a>
+            <a href={this.props.bio.blog}> {this.props.bio.blog}</a>
           </li>}
-                </ul>
-            </div>
-            )
-    }
-});
+        </ul>
+      </div>
+    )
+  }
+}
+;
 
-module.exports = UserProfile;
+UserProfile.propTypes = {
+  username: React.PropTypes.string.isRequired,
+  bio: React.PropTypes.object.isRequired
+};
+
+export default UserProfile;
