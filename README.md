@@ -1,4 +1,8 @@
 # Playground-react-webpack
+==> Go to DNR photo component
+1) Login to DNR
+2) Search for DNR photos of today or of yesterday
+3) Select several photos and save the thumbnail links in firebase db
 
 ## Technology stack
 React
