@@ -4,7 +4,7 @@ class Home extends React.Component {
   render() {
     return (
       <h2 className="text-center">
-        Search Random Picture
+        Search for De Morgen Picture
       </h2>
     )
   }
