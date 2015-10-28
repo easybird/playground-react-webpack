@@ -13,19 +13,10 @@ function getUsersUrl(totalUsers) {
 }
 
 function getUsers(url) {
-    var users = [];
-    var totalCount = 0;
     return axios.get(`${url}`)
         .then((result) => {
-            console.log(result.headers.link);
-            totalCount = totalCount+result.data.items.length;
-            console.log(result.data.items);
-            
-            users.push(result.data.items);
-            //if (totalCount<totalUsers){
-            //
-            //}
             return {
+                link: result.headers.link,
                 users: result.data.items
             }
         });
@@ -46,6 +37,9 @@ var helpers = {
     },
     getBelgiumUsers(totalUsers) {
         return getUsers(getUsersUrl(totalUsers));
+    },
+    getNext(url){
+        return getUsers(`${url}`);
     }
 };
 
