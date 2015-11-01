@@ -8,7 +8,8 @@ class Users extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            loading: false
         };
     }
 
@@ -30,8 +31,14 @@ class Users extends React.Component {
 
                 this.setState({
                     link: utils.getLink(dataObj.link),
-                    users: this.state.users
+                    users: this.state.users,
+                    loading: false
                 });
+            })
+        .catch(() => {
+                this.setState({
+                    loading:false
+                })
             });
     }
 
@@ -58,17 +65,20 @@ class Users extends React.Component {
     }
 
     handleScroll(event) {
-        let scrollTop = event.srcElement.body.scrollTop,
-            itemTranslate = Math.min(0, scrollTop / 3 - 60);
+        let scrollPosition = this.calculateScrollPosition(event);
 
-        console.log(itemTranslate);
-        if (itemTranslate === 0) {
-            scrollTop = event.srcElement.body.scrollTop;
+        if (scrollPosition > 70 && !this.state.loading) {
             this.getNextItems();
+            this.setState({
+                loading: true
+            });
         }
-        this.setState({
-            transform: itemTranslate
-        });
+    }
+
+    calculateScrollPosition(event) {
+        var scrollTopMax = event.srcElement.body.scrollHeight - window.innerHeight;
+        var bottomPercentage = event.srcElement.body.scrollTop / scrollTopMax * 100;
+        return bottomPercentage;
     }
 
     render() {
