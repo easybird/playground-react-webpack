@@ -11,10 +11,10 @@ class SearchGithub extends React.Component{
         return (
             <div className="col-sm-12">
                 <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div className="col-sm-7">
+                    <div className="col-sm-12">
                         <input type="text" className="form-control" ref="username" />
                     </div>
-                    <div className="form-group col-sm-7">
+                    <div className="form-group col-sm-12">
                         <button type="submit" className="btn btn-block btn-primary">Search Github </button>
                     </div>
                 </form>
