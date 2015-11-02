@@ -9,7 +9,8 @@ class Users extends React.Component {
         super(props);
         this.state = {
             users: [],
-            loading: false
+            loading: false,
+            selectedUsers: []
         };
     }
 
@@ -20,7 +21,6 @@ class Users extends React.Component {
                     link: utils.getLink(dataObj.link),
                     users: _.shuffle(dataObj.users)
                 });
-                this.getNextItems();
             });
     }
 
@@ -35,9 +35,9 @@ class Users extends React.Component {
                     loading: false
                 });
             })
-        .catch(() => {
+            .catch(() => {
                 this.setState({
-                    loading:false
+                    loading: false
                 })
             });
     }
@@ -75,24 +75,72 @@ class Users extends React.Component {
         }
     }
 
+    toggleUser(user) {
+        addOrRemoveUserFromSelectedUsers.call(this);
+        this.setState({
+            selectedUsers: this.state.selectedUsers
+        });
+
+        function addOrRemoveUserFromSelectedUsers() {
+            var index = this.state.selectedUsers.indexOf(user);
+            if (index === -1) {
+                this.state.selectedUsers.push(user);
+            } else {
+                this.state.selectedUsers.splice(index, 1);
+            }
+        }
+    }
+
     calculateScrollPosition(event) {
         var scrollTopMax = event.srcElement.body.scrollHeight - window.innerHeight;
         var bottomPercentage = event.srcElement.body.scrollTop / scrollTopMax * 100;
         return bottomPercentage;
     }
 
+    mapUsers(users) {
+        return users.map((user, index) => {
+            return <User user={user} key={index} router={this.router} toggleUser={this.toggleUser.bind(this)}/>
+        });
+    }
+
+    mapSelectedUsers(selectedUsers) {
+        if (!_.isEmpty(selectedUsers)) {
+            return <div className="row" style={{backgroundColor: "azure", textAlign: "center"}}>
+                    <h2>Selected users for cropping</h2>
+
+                <div className="col-sm-8">
+                    {this.mapUsers(selectedUsers)}
+                    </div>
+                <div className="col-sm-4">
+                    <button type="button" className="btn btn-block btn-primary" style={{marginTop: "150px"}}>Crop user pics</button>
+                </div>
+            </div>
+        }
+    }
+
     render() {
         console.log('render');
         var totalUsers = this.router.getCurrentParams().totalUsers;
-        var users = this.state.users.map((user, index) => {
-            return <User user={user} key={index} router={this.router}/>
-        });
+        var users = this.mapUsers(this.state.users);
+        var selectedUsers = this.mapSelectedUsers(this.state.selectedUsers);
 
         return (
             <div className="row">
-                <p>Requested users: {totalUsers}</p>
-                <p>Received users: {this.state.users.length}</p>
-        {users}
+                <div className="row">
+                    <div className="col-sm-3">
+                        <p>Requested users: {totalUsers}</p>
+                    </div>
+                    <div className="col-sm-3">
+                        <p>Received users: {this.state.users.length}</p>
+                    </div>
+                    <div className="col-sm-3">
+                        <p>Selected users: {this.state.selectedUsers.length}</p>
+                    </div>
+                </div>
+                    {selectedUsers}
+                <div className="row">
+                    {users}
+                </div>
             </div>
         )
     }
