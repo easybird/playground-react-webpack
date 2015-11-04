@@ -26,6 +26,7 @@ class User extends React.Component {
 ;
 
 User.propTypes = {
+    router: React.PropTypes.func.isRequired,
     user: React.PropTypes.object.isRequired,
     toggleUser: React.PropTypes.func.isRequired
 };

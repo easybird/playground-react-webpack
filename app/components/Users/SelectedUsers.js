@@ -5,7 +5,7 @@ class SelectedUsers extends React.Component {
 
     mapUsers(users) {
         return users.map((user, index) => {
-            return <User user={user} key={index} toggleUser={this.props.toggleUser.bind(this)}/>
+            return <User user={user} key={index} toggleUser={this.props.toggleUser.bind(this)} router={this.props.router}/>
         });
     }
 
@@ -32,6 +32,7 @@ class SelectedUsers extends React.Component {
 ;
 
 SelectedUsers.propTypes = {
+    router: React.PropTypes.func.isRequired,
     selectedUsers: React.PropTypes.array.isRequired,
     toggleUser: React.PropTypes.func.isRequired,
     toggleCropper: React.PropTypes.func.isRequired

@@ -1,6 +1,6 @@
 import React from 'react';
 import helpers from'../../utils/helpers';
-import User from './User';
+import Users from './Users';
 import UsersStatus from './UsersStatus';
 import SelectedUsers from './SelectedUsers';
 import _ from 'lodash';
@@ -119,9 +119,9 @@ class UsersPanel extends React.Component {
         return (
             <div className="row">
                 <UsersStatus requestedUsers={this.router.getCurrentParams().totalUsers} receivedUsers={this.state.users} selectedUsers={this.state.selectedUsers}/>
-                <SelectedUsers selectedUsers={this.state.selectedUsers} toggleUser={this.toggleUser.bind(this)} toggleCropper={this.toggleCropper.bind(this)}/>
+                <SelectedUsers selectedUsers={this.state.selectedUsers} toggleUser={this.toggleUser.bind(this)} toggleCropper={this.toggleCropper.bind(this)} router={this.router}/>
                     {crop}
-                <Users users={this.state.users} toggleUser={this.toggleUser.bind(this)}/>
+                <Users users={this.state.users} toggleUser={this.toggleUser.bind(this)} router={this.router}/>
             </div>
         )
     }
