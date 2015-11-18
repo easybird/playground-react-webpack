@@ -10,6 +10,8 @@ class SelectedUsers extends React.Component {
     }
 
     render() {
+        console.log("Render SelectedUsers");
+
         var selectedUsers = this.props.selectedUsers;
 
         if (!_.isEmpty(selectedUsers)) {

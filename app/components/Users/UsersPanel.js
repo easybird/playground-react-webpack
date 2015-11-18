@@ -46,24 +46,24 @@ class UsersPanel extends React.Component {
     }
 
     componentWillMount() {
-        console.log('componentWillMount');
+        console.log('componentWillMount UserPanel');
         this.router = this.context.router;
     }
 
     // will be called right after the component has mount the view
     componentDidMount() {
-        console.log('componentDidMount');
+        console.log('componentDidMount UserPanel');
         window.addEventListener('scroll', this.handleScroll.bind(this));
         this.init();
     }
 
     componentWillReceiveProps() {
-        console.log('componentWillReceiveProps');
+        console.log('componentWillReceiveProps UserPanel');
         this.init();
     }
 
     componentWillUnMount() {
-        console.log('componentWillUnMount');
+        console.log('componentWillUnMount UserPanel');
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
 
@@ -113,7 +113,7 @@ class UsersPanel extends React.Component {
     }
 
     render() {
-        console.log('render');
+        console.log('render UserPanel');
         var crop = this.createCropper(this.state.selectedUsers, this.state.readyToCrop);
 
         return (

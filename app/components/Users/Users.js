@@ -10,6 +10,8 @@ class Users extends React.Component {
     }
 
     render() {
+        console.log("Render Users");
+
         return (
             <div className="row">
                     {this.mapUsers(this.props.users)}
@@ -20,7 +22,7 @@ class Users extends React.Component {
 
 Users.contextTypes = {
     router: React.PropTypes.func.isRequired,
-    users: React.PropTypes.array.isRequired,
-    toggleUser: React.PropTypes.func.isRequired
+    users: React.PropTypes.array,
+    toggleUser: React.PropTypes.func
 };
 export default Users;

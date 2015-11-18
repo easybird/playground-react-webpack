@@ -8,6 +8,7 @@ class SearchGithub extends React.Component{
         router.transitionTo('profile', {username: username});
     }
     render() {
+        console.log("Render SearchGithub");
         return (
             <div className="col-sm-12">
                 <form onSubmit={this.handleSubmit.bind(this)}>

@@ -2,6 +2,8 @@ import React from 'react';
 
 class UsersStatus extends React.Component {
     render() {
+        console.log("Render UsersStatus");
+
         var requestedUsers = this.props.requestedUsers;
         var receivedUsers = this.props.receivedUsers;
         var selectedUsers = this.props.selectedUsers;
