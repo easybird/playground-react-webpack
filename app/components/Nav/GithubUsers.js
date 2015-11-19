@@ -15,7 +15,7 @@ class GithubUsers extends React.Component{
     }
 
     componentDidMount() {
-        console.log("ComponentDidMount SelectedUsers");
+        console.log("ComponentDidMount GithubUsers");
 
         this.refs.totalUsers.getDOMNode().value = this.defaultTotalUsers;
     }

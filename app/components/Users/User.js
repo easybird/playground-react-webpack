@@ -9,7 +9,6 @@ class User extends React.Component {
         this.props.toggleUser(this.props.user);
     }
     render() {
-        console.log("Render User");
         var url = this.props.user.avatar_url;
         var login = this.props.user.login;
         return (

@@ -17,37 +17,22 @@ class UsersPanel extends React.Component {
         };
     }
 
-    init() {
-        helpers.getBelgiumUsers(this.router.getCurrentParams().totalUsers)
-            .then((dataObj) => {
-                this.setState({
-                    link: utils.getLink(dataObj.link),
-                    users: _.shuffle(dataObj.users)
-                });
-            });
-    }
-
-    getNextItems() {
-        helpers.getNext(this.state.link)
-            .then((dataObj) => {
-                this.state.users.push.apply(this.state.users, dataObj.users);
-
-                this.setState({
-                    link: utils.getLink(dataObj.link),
-                    users: this.state.users,
-                    loading: false
-                });
-            })
-            .catch(() => {
-                this.setState({
-                    loading: false
-                })
-            });
-    }
-
     componentWillMount() {
         console.log('componentWillMount UserPanel');
         this.router = this.context.router;
+    }
+
+    render() {
+        var crop = this.createCropper(this.state.selectedUsers, this.state.readyToCrop);
+
+        return (
+          <div className="row">
+              <UsersStatus receivedUsers={this.state.users} selectedUsers={this.state.selectedUsers}/>
+              {!_.isEmpty(this.state.selectedUsers) && <SelectedUsers selectedUsers={this.state.selectedUsers} toggleUser={this.toggleUser.bind(this)} toggleCropper={this.toggleCropper.bind(this)} router={this.router}/>}
+              {crop}
+              <Users users={this.state.users} toggleUser={this.toggleUser.bind(this)} router={this.router}/>
+          </div>
+        )
     }
 
     // will be called right after the component has mount the view
@@ -62,7 +47,7 @@ class UsersPanel extends React.Component {
         this.init();
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         console.log('componentWillUnMount UserPanel');
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
@@ -76,6 +61,34 @@ class UsersPanel extends React.Component {
                 loading: true
             });
         }
+    }
+
+    init() {
+        helpers.getBelgiumUsers(this.router.getCurrentParams().totalUsers)
+          .then((dataObj) => {
+              this.setState({
+                  link: utils.getLink(dataObj.link),
+                  users: _.shuffle(dataObj.users)
+              });
+          });
+    }
+
+    getNextItems() {
+        helpers.getNext(this.state.link)
+          .then((dataObj) => {
+              this.state.users.push.apply(this.state.users, dataObj.users);
+
+              this.setState({
+                  link: utils.getLink(dataObj.link),
+                  users: this.state.users,
+                  loading: false
+              });
+          })
+          .catch(() => {
+              this.setState({
+                  loading: false
+              })
+          });
     }
 
     toggleUser(user) {
@@ -112,19 +125,6 @@ class UsersPanel extends React.Component {
         }
     }
 
-    render() {
-        console.log('render UserPanel');
-        var crop = this.createCropper(this.state.selectedUsers, this.state.readyToCrop);
-
-        return (
-            <div className="row">
-                <UsersStatus requestedUsers={this.router.getCurrentParams().totalUsers} receivedUsers={this.state.users} selectedUsers={this.state.selectedUsers}/>
-                <SelectedUsers selectedUsers={this.state.selectedUsers} toggleUser={this.toggleUser.bind(this)} toggleCropper={this.toggleCropper.bind(this)} router={this.router}/>
-                    {crop}
-                <Users users={this.state.users} toggleUser={this.toggleUser.bind(this)} router={this.router}/>
-            </div>
-        )
-    }
 }
 ;
 

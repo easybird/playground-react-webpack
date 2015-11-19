@@ -10,8 +10,6 @@ class Users extends React.Component {
     }
 
     render() {
-        console.log("Render Users");
-
         return (
             <div className="row">
                     {this.mapUsers(this.props.users)}

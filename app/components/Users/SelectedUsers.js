@@ -9,9 +9,24 @@ class SelectedUsers extends React.Component {
         });
     }
 
-    render() {
-        console.log("Render SelectedUsers");
 
+    componentDidMount() {
+        console.log("ComponentDidMount SelectedUsers");
+    }
+
+    componentWillMount() {
+        console.log("ComponentWillMount SelectedUsers");
+    }
+
+    componentWillUnmount() {
+        console.log("componentWillUnmount SelectedUsers");
+    }
+
+    componentWillReceiveProps() {
+        console.log("ComponentWillReceiveProps SelectedUsers");
+    }
+
+    render() {
         var selectedUsers = this.props.selectedUsers;
 
         if (!_.isEmpty(selectedUsers)) {
