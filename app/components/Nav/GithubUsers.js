@@ -15,10 +15,13 @@ class GithubUsers extends React.Component{
     }
 
     componentDidMount() {
+        console.log("ComponentDidMount GithubUsers");
+
         this.refs.totalUsers.getDOMNode().value = this.defaultTotalUsers;
     }
 
     render() {
+        console.log("Render GithubUsers");
         return (
             <div className="col-sm-12">
                 <form onSubmit={this.handleSubmit.bind(this)}>
